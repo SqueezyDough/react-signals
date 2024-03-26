@@ -1,12 +1,12 @@
 import React from "react";
-import { Todo } from "../todo-list/TodoList.utils";
+import type { Todo } from "../todo-list/TodoList.utils";
 
 type NavbarProps = {
   todos?: Todo[];
 };
 
 const Navbar: React.FC<NavbarProps> = ({ todos }) => {
-  console.log("render Navbar", todos);
+  console.log("render Navbar");
 
   const completedTodos = todos?.filter(todo => todo.completed).length || 0;
 
@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ todos }) => {
             {completedTodos > 0 && <span>Completed: {completedTodos}</span>}
           </li>
 
-          <li>Account</li>
+          <li>Not my todos</li>
         </ul>
       </nav>
     </header>

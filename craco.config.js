@@ -5,5 +5,8 @@ module.exports = {
     plugins: {
       add: [new VanillaExtractPlugin()]
     }
+  },
+  babel: {
+    plugins: [["module:@preact/signals-react-transform"]]
   }
 };

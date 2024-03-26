@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import { Todo, getTodos, saveTodos } from "./components/todo-list/TodoList.utils";
 import Slider from "./components/slider/Slider";
+import BasicTodoList from "./components/todo-list/BasicTodoList";
 import SignalsTodoList from "./components/todo-list/SignalsTodoList";
-import ReactTodoList from "./components/todo-list/ReactTodoList";
+
+// const todos = signal(getTodos());
+
+// export const completedTodos = computed(() => {
+//   return todos.value.filter(todo => todo.completed).length || 0;
+// });
 
 function App() {
   console.log("render App");
@@ -46,8 +52,9 @@ function App() {
       <Slider />
 
       <main>
-        <ReactTodoList />
-        <SignalsTodoList addTodo={addTodo} toggleTodo={toggleTodo} todos={todos} />
+        {/* <SignalsTodoList /> */}
+
+        <BasicTodoList addTodo={addTodo} toggleTodo={toggleTodo} todos={todos} />
       </main>
     </div>
   );

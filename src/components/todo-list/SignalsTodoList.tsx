@@ -1,40 +1,58 @@
-import React, { FormEvent, useState } from "react";
-import { Todo } from "./TodoList.utils";
-import { todoList } from "./TodoList.css";
+import React, { FormEvent, useEffect, useState } from "react";
+import { Todo, getTodos, saveTodos } from "./TodoList.utils";
 
 type SignalsTodoListProps = {
-  todos: Todo[];
-  addTodo: (todo: Todo) => void;
-  toggleTodo: (todo: Todo) => void;
   // Define the props for your component here
 };
 
-const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos, addTodo, toggleTodo }) => {
-  console.log("render Signals TodoList");
+const SignalsTodoList: React.FC<SignalsTodoListProps> = () => {
+  console.log("render React TodoList");
 
+  const [todos, setTodos] = useState(getTodos());
   const [newTodoName, setNewTodoName] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const addTodo = (e: FormEvent) => {
     e.preventDefault();
 
-    addTodo({
-      id: crypto.randomUUID(),
-      name: newTodoName,
-      completed: false
+    setTodos(prevTodos => {
+      return [
+        ...prevTodos,
+        {
+          id: crypto.randomUUID(),
+          name: newTodoName,
+          completed: false
+        }
+      ];
     });
 
     setNewTodoName("");
   };
 
+  const toggleTodo = ({ id, completed }: Todo) => {
+    setTodos(prevTodo => {
+      return prevTodo.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, completed };
+        }
+
+        return todo;
+      });
+    });
+  };
+
+  useEffect(() => {
+    saveTodos(todos);
+  }, [todos]);
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <h2>Todos</h2>
+      <form onSubmit={addTodo}>
         <label>New Task</label>
         <input type="text" value={newTodoName} onChange={e => setNewTodoName(e.target.value)} />
         <button type="submit">Add</button>
       </form>
-
-      <ul role="list" className={todoList}>
+      <ul role="list">
         {todos.map(todo => (
           <li key={todo.id}>
             <input
