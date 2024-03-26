@@ -16,6 +16,6 @@ export const getTodos = (): Todo[] => {
   return JSON.parse(todos);
 };
 
-export const setTodos = (todos: Todo[]) => {
+export const saveTodos = (todos: Todo[]) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
 };

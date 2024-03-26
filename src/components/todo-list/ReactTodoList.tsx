@@ -1,11 +1,13 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { Todo, getTodos } from "./TodoList.utils";
+import { Todo, getTodos, saveTodos } from "./TodoList.utils";
 
-type TodoListProps = {
+type ReactTodoListProps = {
   // Define the props for your component here
 };
 
-const TodoList: React.FC<TodoListProps> = props => {
+const ReactTodoList: React.FC<ReactTodoListProps> = props => {
+  console.log("render React TodoList");
+
   const [todos, setTodos] = useState(getTodos());
   const [newTodoName, setNewTodoName] = useState("");
 
@@ -39,7 +41,7 @@ const TodoList: React.FC<TodoListProps> = props => {
   };
 
   useEffect(() => {
-    setTodos(todos);
+    saveTodos(todos);
   }, [todos]);
 
   return (
@@ -50,7 +52,7 @@ const TodoList: React.FC<TodoListProps> = props => {
         <button type="submit">Add</button>
       </form>
 
-      <ul>
+      <ul role="list">
         {todos.map(todo => (
           <li key={todo.id}>
             <input
@@ -71,4 +73,4 @@ const TodoList: React.FC<TodoListProps> = props => {
   );
 };
 
-export default TodoList;
+export default ReactTodoList;

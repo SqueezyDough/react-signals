@@ -1,13 +1,25 @@
 import React from "react";
+import { Todo } from "../todo-list/TodoList.utils";
 
-type NavbarProps = {};
+type NavbarProps = {
+  todos?: Todo[];
+};
 
-const Navbar: React.FC<NavbarProps> = props => {
+const Navbar: React.FC<NavbarProps> = ({ todos }) => {
+  console.log("render Navbar", todos);
+
+  const completedTodos = todos?.filter(todo => todo.completed).length || 0;
+
   return (
     <header>
       <nav>
         <ul>
-          <li>My todos</li>
+          <li>
+            <span>My todos </span>
+
+            {completedTodos > 0 && <span>Completed: {completedTodos}</span>}
+          </li>
+
           <li>Account</li>
         </ul>
       </nav>
