@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import "./app.css";
 import Navbar from "./components/navbar/Navbar";
 import { Todo, getTodos, saveTodos } from "./components/todo-list/TodoList.utils";
 import Slider from "./components/slider/Slider";
 import BasicTodoList from "./components/todo-list/BasicTodoList";
 import SignalsTodoList from "./components/todo-list/SignalsTodoList";
+import { page } from "./app.css";
 
 // const todos = signal(getTodos());
 
@@ -47,15 +49,19 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar todos={todos} />
+      <div className={page}>
+        <Navbar todos={todos} />
 
-      <Slider />
+        <main>
+          <h1>Signals</h1>
 
-      <main>
-        {/* <SignalsTodoList /> */}
+          <Slider />
 
-        <BasicTodoList addTodo={addTodo} toggleTodo={toggleTodo} todos={todos} />
-      </main>
+          {/* <SignalsTodoList /> */}
+
+          <BasicTodoList addTodo={addTodo} toggleTodo={toggleTodo} todos={todos} />
+        </main>
+      </div>
     </div>
   );
 }

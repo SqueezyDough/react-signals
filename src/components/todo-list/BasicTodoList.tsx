@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { Todo } from "./TodoList.utils";
-import { todoList } from "./TodoList.css";
+import { buttonNewTodo, checkbox, formTodos, listTodos, newTodoLabel } from "./TodoList.css";
 
 type BasicTodoListProps = {
   todos: Todo[];
@@ -27,26 +27,33 @@ const BasicTodoList: React.FC<BasicTodoListProps> = ({ todos, addTodo, toggleTod
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>New Task</label>
+      <h2>Todos</h2>
+
+      <form className={formTodos} onSubmit={handleSubmit}>
+        <label className={newTodoLabel}>New todo</label>
         <input type="text" value={newTodoName} onChange={e => setNewTodoName(e.target.value)} />
-        <button type="submit">Add</button>
+        <button className={buttonNewTodo} type="submit">
+          Add
+        </button>
       </form>
 
-      <ul role="list" className={todoList}>
+      <ul role="list" className={listTodos}>
         {todos.map(todo => (
           <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={e =>
-                toggleTodo({
-                  id: todo.id,
-                  completed: e.target.checked
-                })
-              }
-            />
-            <span>{todo.name}</span>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                className={checkbox}
+                onChange={e =>
+                  toggleTodo({
+                    id: todo.id,
+                    completed: e.target.checked
+                  })
+                }
+              />
+              <span>{todo.name}</span>
+            </label>
           </li>
         ))}
       </ul>
