@@ -1,65 +1,31 @@
-import { useEffect, useState } from "react";
 import "./app.css";
 import Navbar from "./components/navbar/Navbar";
-import { Todo, getTodos, saveTodos } from "./components/todo-list/TodoList.utils";
+import { getTodos } from "./components/todo-list/TodoList.utils";
 import Slider from "./components/slider/Slider";
-import BasicTodoList from "./components/todo-list/BasicTodoList";
-import SignalsTodoList from "./components/todo-list/SignalsTodoList";
+import TodoList from "./components/todo-list/TodoList";
 import { page } from "./app.css";
+import { signal, computed } from "@preact/signals-react";
 
-// const todos = signal(getTodos());
+const todos = signal(getTodos());
 
-// export const completedTodos = computed(() => {
-//   return todos.value.filter(todo => todo.completed).length || 0;
-// });
+const completedTodos = computed(() => {
+  return todos.value.filter(todo => todo.completed).length || 0;
+});
 
 function App() {
   console.log("render App");
 
-  const [todos, setTodos] = useState(getTodos());
-
-  const addTodo = ({ name }: Todo) => {
-    setTodos(prevTodos => {
-      return [
-        ...prevTodos,
-        {
-          id: crypto.randomUUID(),
-          name,
-          completed: false
-        }
-      ];
-    });
-  };
-
-  const toggleTodo = ({ id, completed }: Todo) => {
-    setTodos(prevTodo => {
-      return prevTodo.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed };
-        }
-
-        return todo;
-      });
-    });
-  };
-
-  useEffect(() => {
-    saveTodos(todos);
-  }, [todos]);
-
   return (
     <div className="App">
       <div className={page}>
-        <Navbar todos={todos} />
+        <Navbar completedTodos={completedTodos} />
 
         <main>
           <h1>Signals</h1>
 
           <Slider />
 
-          {/* <SignalsTodoList /> */}
-
-          <BasicTodoList addTodo={addTodo} toggleTodo={toggleTodo} todos={todos} />
+          <TodoList todos={todos} />
         </main>
       </div>
     </div>

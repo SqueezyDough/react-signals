@@ -1,49 +1,44 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import { Todo, getTodos, saveTodos } from "./TodoList.utils";
+import React, { FormEvent, useState } from "react";
+import { Todo, saveTodos } from "./TodoList.utils";
 import { buttonNewTodo, checkbox, formTodos, listTodos, newTodoLabel } from "./TodoList.css";
+import { Signal, effect } from "@preact/signals-react";
 
 type SignalsTodoListProps = {
-  // Define the props for your component here
+  todos: Signal<Todo[]>;
 };
 
-const SignalsTodoList: React.FC<SignalsTodoListProps> = () => {
-  console.log("render React TodoList");
+const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos }) => {
+  console.log("render TodoList");
 
-  const [todos, setTodos] = useState(getTodos());
   const [newTodoName, setNewTodoName] = useState("");
 
   const addTodo = (e: FormEvent) => {
     e.preventDefault();
 
-    setTodos(prevTodos => {
-      return [
-        ...prevTodos,
-        {
-          id: crypto.randomUUID(),
-          name: newTodoName,
-          completed: false
-        }
-      ];
-    });
-
+    todos.value = [
+      ...todos.value,
+      {
+        id: crypto.randomUUID(),
+        name: newTodoName,
+        completed: false
+      }
+    ];
     setNewTodoName("");
   };
 
   const toggleTodo = ({ id, completed }: Todo) => {
-    setTodos(prevTodo => {
-      return prevTodo.map(todo => {
-        if (todo.id === id) {
-          return { ...todo, completed };
-        }
+    todos.value = todos.value.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, completed };
+      }
 
-        return todo;
-      });
+      return todo;
     });
   };
 
-  useEffect(() => {
-    saveTodos(todos);
-  }, [todos]);
+  effect(() => {
+    saveTodos(todos.value);
+  });
 
   return (
     <>
@@ -58,7 +53,7 @@ const SignalsTodoList: React.FC<SignalsTodoListProps> = () => {
       </form>
 
       <ul className={listTodos} role="list">
-        {todos.map(todo => (
+        {todos.value.map(todo => (
           <li key={todo.id}>
             <label>
               <input

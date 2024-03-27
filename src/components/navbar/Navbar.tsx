@@ -1,15 +1,13 @@
 import React from "react";
-import type { Todo } from "../todo-list/TodoList.utils";
 import { header, link, menu, nav, todosCount } from "./Navbar.css";
+import { Signal } from "@preact/signals-react";
 
 type NavbarProps = {
-  todos?: Todo[];
+  completedTodos: Signal<number>;
 };
 
-const Navbar: React.FC<NavbarProps> = ({ todos }) => {
+const Navbar: React.FC<NavbarProps> = ({ completedTodos }) => {
   console.log("render Navbar");
-
-  const completedTodos = todos?.filter(todo => todo.completed).length || 0;
 
   return (
     <header className={header}>
@@ -19,7 +17,9 @@ const Navbar: React.FC<NavbarProps> = ({ todos }) => {
             <a className={link} href="">
               <span>My todos </span>
 
-              {completedTodos > 0 && <div className={todosCount}>✅ &nbsp; {completedTodos}</div>}
+              {completedTodos.value > 0 && (
+                <div className={todosCount}>✅ &nbsp; {completedTodos}</div>
+              )}
             </a>
           </li>
 
