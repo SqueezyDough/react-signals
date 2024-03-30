@@ -1,15 +1,13 @@
 import React, { FormEvent, useState } from "react";
-import { Todo, saveTodos } from "./TodoList.utils";
 import { buttonNewTodo, checkbox, formTodos, listTodos, newTodoLabel } from "./TodoList.css";
 import { Signal, effect } from "@preact/signals-react";
+import { Todo, removeTodo, saveTodos } from "../../store/todos";
 
 type SignalsTodoListProps = {
   todos: Signal<Todo[]>;
 };
 
 const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos }) => {
-  console.log("render TodoList");
-
   const [newTodoName, setNewTodoName] = useState("");
 
   const addTodo = (e: FormEvent) => {
@@ -37,7 +35,7 @@ const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos }) => {
   };
 
   effect(() => {
-    saveTodos(todos.value);
+    saveTodos(todos);
   });
 
   return (
@@ -69,6 +67,10 @@ const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos }) => {
               />
 
               <span>{todo.name}</span>
+
+              <button type="button" onClick={() => removeTodo(todo.id)}>
+                Remove
+              </button>
             </label>
           </li>
         ))}
