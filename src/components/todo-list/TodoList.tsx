@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { buttonNewTodo, checkbox, formTodos, listTodos, newTodoLabel } from "./TodoList.css";
+import styles from "./TodoList.module.scss";
 import { Signal, effect } from "@preact/signals-react";
 import { Todo, removeTodo, saveTodos } from "../../store/todos";
 
@@ -42,22 +42,22 @@ const SignalsTodoList: React.FC<SignalsTodoListProps> = ({ todos }) => {
     <>
       <h2>Todos</h2>
 
-      <form className={formTodos} onSubmit={addTodo}>
-        <label className={newTodoLabel}>New todo</label>
+      <form className={styles.formTodos} onSubmit={addTodo}>
+        <label className={styles.newTodoLabel}>New todo</label>
         <input type="text" value={newTodoName} onChange={e => setNewTodoName(e.target.value)} />
-        <button className={buttonNewTodo} type="submit">
+        <button className={styles.buttonNewTodo} type="submit">
           Add
         </button>
       </form>
 
-      <ul className={listTodos} role="list">
+      <ul className={styles.listTodos} role="list">
         {todos.value.map(todo => (
           <li key={todo.id}>
             <label>
               <input
                 type="checkbox"
                 checked={todo.completed}
-                className={checkbox}
+                className={styles.checkbox}
                 onChange={e =>
                   toggleTodo({
                     id: todo.id,

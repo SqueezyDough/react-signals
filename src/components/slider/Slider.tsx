@@ -1,7 +1,7 @@
 import React from "react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { container, slider } from "./Slider.css";
+import styles from "./Slider.module.scss";
 import clsx from "clsx";
 
 interface Props {}
@@ -12,8 +12,8 @@ const Slider: React.FC<Props> = props => {
   const [sliderRef] = useKeenSlider({}, []);
 
   return (
-    <div className={container}>
-      <div ref={sliderRef} className={clsx("keen-slider", slider)}>
+    <div className={styles.container}>
+      <div ref={sliderRef} className={clsx("keen-slider", styles.slider)}>
         <div className="keen-slider__slide">
           <img src="/images/react-signals.001.jpeg" alt="slide 1" />
         </div>

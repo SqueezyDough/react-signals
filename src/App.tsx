@@ -5,13 +5,10 @@ import { page } from "./app.css";
 import { completedTodos, todos } from "./store/todos";
 
 function App() {
-  console.log("render App");
-
   return (
     <div className="App">
       <div className={page}>
         <Navbar completedTodos={completedTodos} />
-
         <main>
           <h1>Signals</h1>
 

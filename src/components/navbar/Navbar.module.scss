@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  position: sticky;
+  top: 1rem;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f7f6f0;
+}
+
+.nav {
+  padding: 1rem;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px;
+  color: #016f31;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.todosCount {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5em;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: grey;
+  font-size: 0.75rem;
+  width: max-content;
+}
