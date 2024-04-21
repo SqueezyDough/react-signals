@@ -1,13 +1,13 @@
 import "./app.css";
 import Navbar from "./components/navbar/Navbar";
 import TodoList from "./components/todo-list/TodoList";
-import { page } from "./app.css";
+import { page } from "./app.scss";
 import { completedTodos, todos } from "./store/todos";
 
 function App() {
   return (
-    <div className="App">
-      <div className={page}>
+    <div className="app">
+      <div className="page">
         <Navbar completedTodos={completedTodos} />
         <main>
           <h1>Signals</h1>

@@ -1,0 +1,33 @@
+@font-face {
+  font-family: outfit;
+  src: url(https://fonts.gstatic.com/s/outfit/v6/QGYvz_MVcBeNP4NJtEtqUYLknw.woff2) format("woff2");
+}
+
+.page {
+  display: block;
+  background-color: #f7f6f0;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: "outfit";
+}
+
+main {
+  padding: 2rem 0;
+  margin: auto;
+  max-width: 1200px;
+}
+
+input[type="text"] {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.keen-slider__slide img {
+  width: 100%;
+}
