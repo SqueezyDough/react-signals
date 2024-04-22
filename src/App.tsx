@@ -1,8 +1,7 @@
-import "./app.css";
 import Navbar from "./components/navbar/Navbar";
 import TodoList from "./components/todo-list/TodoList";
-import { page } from "./app.scss";
 import { completedTodos, todos } from "./store/todos";
+import "./app.scss";
 
 function App() {
   return (
