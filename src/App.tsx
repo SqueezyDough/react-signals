@@ -11,6 +11,8 @@ function App() {
         <main>
           <h1>Signals</h1>
 
+          <p>Test</p>
+
           <TodoList todos={todos} />
         </main>
       </div>
